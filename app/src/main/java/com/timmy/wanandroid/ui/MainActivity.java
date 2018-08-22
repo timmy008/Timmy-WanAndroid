@@ -1,10 +1,11 @@
-package com.timmy.wanandroid;
+package com.timmy.wanandroid.ui;
 
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.orhanobut.logger.Logger;
+import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.core.Log;
 
 import java.io.File;
