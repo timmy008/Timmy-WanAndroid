@@ -1,4 +1,4 @@
-package com.timmy.wanandroid.core;
+package com.timmy.wanandroid.core.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

@@ -1,23 +1,20 @@
 package com.timmy.wanandroid.ui;
 
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.orhanobut.logger.Logger;
 import com.timmy.wanandroid.R;
-import com.timmy.wanandroid.core.Log;
+import com.timmy.wanandroid.contract.main.MainContract;
+import com.timmy.wanandroid.core.activity.BaseActivity;
+import com.timmy.wanandroid.presenter.main.MainPresenter;
 
-import java.io.File;
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.IView {
 
-public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        String diskPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String folder = diskPath + File.separatorChar + "logger";
-        Log.d(folder);
+    protected int getLayout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initInject() {
+        getActivityComponent().inject(this);
     }
 }
