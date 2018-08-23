@@ -29,13 +29,14 @@ public class RxUtil {
      * @return
      */
     public static <T> FlowableTransformer<HttpResponse<T>, T> handleResult() {
-        return httpResponseFlowable -> httpResponseFlowable.flatMap((Function<HttpResponse<T>, Flowable<T>>) httpResponse -> {
-            if (httpResponse.getErrorCode() == 0) {
-                return createData(httpResponse.getData());
-            } else {
-                return Flowable.error(new ApiException("服务器返回error"));
-            }
-        });
+        return httpResponseFlowable -> httpResponseFlowable
+                .flatMap((Function<HttpResponse<T>, Flowable<T>>) httpResponse -> {
+                    if (httpResponse.getErrorCode() == 0) {
+                        return createData(httpResponse.getData());
+                    } else {
+                        return Flowable.error(new ApiException("服务器返回error"));
+                    }
+                });
     }
 
     /**

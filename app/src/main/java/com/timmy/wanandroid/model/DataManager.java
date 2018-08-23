@@ -24,4 +24,6 @@ public class DataManager implements IHttpHelper {
     public Flowable<HttpResponse<List<BannerItemInfo>>> getBanner() {
         return mHttpHelper.getBanner();
     }
+
+
 }

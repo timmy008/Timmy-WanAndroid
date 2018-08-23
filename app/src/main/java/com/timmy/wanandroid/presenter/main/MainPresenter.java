@@ -24,7 +24,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainPresenter extends RxPresenter<MainContract.IView> implements MainContract.IPresenter {
 
-    private static final String RES = "1080*1776";
     private DataManager mDataManager;
 
     @Inject
@@ -35,7 +34,6 @@ public class MainPresenter extends RxPresenter<MainContract.IView> implements Ma
 
     @Override
     public String getMy() {
-
         addSubscribe(mDataManager.getBanner()
                 .compose(RxUtil.rxSchedulerHelper())
                 .compose(RxUtil.handleResult())
