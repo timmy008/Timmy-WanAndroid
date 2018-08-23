@@ -28,7 +28,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFra
         if (getView() == null) {
             return;
         }
-        viewMain = getView().findViewById(R.id.view_main);
+        viewMain = getView().findViewById(R.id.view_content_root);
         if (viewMain == null) {
             throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_main'.");
         }

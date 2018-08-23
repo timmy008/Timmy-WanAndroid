@@ -1,5 +1,6 @@
 package com.timmy.wanandroid.core.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,8 +27,8 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
     private boolean isErrorViewAdded = false;
 
     @Override
-    protected void initStateUI() {
-        viewMain = findViewById(R.id.view_main);
+    protected void initStateUI(Bundle savedInstanceState) {
+        viewMain = findViewById(R.id.view_content_root);
         if (viewMain == null) {
             throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_main'.");
         }
@@ -40,7 +41,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
         ivLoading = viewLoading.findViewById(R.id.iv_progress);
         viewLoading.setVisibility(View.GONE);
         viewMain.setVisibility(View.VISIBLE);
-        initEventAndData();
+        initEventAndData(savedInstanceState);
     }
 
     @Override
@@ -114,6 +115,6 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
     /**
      * 界面入口
      */
-    protected abstract void initEventAndData();
+    protected abstract void initEventAndData(Bundle savedInstanceState);
 
 }

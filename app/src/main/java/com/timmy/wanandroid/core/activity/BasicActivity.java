@@ -25,8 +25,9 @@ public abstract class BasicActivity extends SupportActivity {
         mContext = this;
         onViewCreated();
         App.getInstance().addActivity(this);
-        initStateUI();
+        initStateUI(savedInstanceState);
     }
+
 
     protected void onViewCreated() {
 
@@ -44,6 +45,7 @@ public abstract class BasicActivity extends SupportActivity {
     }
 
     protected abstract int getLayout();
-    protected abstract void initStateUI();
+    protected abstract void initStateUI(Bundle savedInstanceState);
+
 
 }

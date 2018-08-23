@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">WanAndroid</string>
     <string name="error_tips">糟糕！加载失败了ヽ(≧Д≦)ノ\n 偷偷告诉你一些可能的原因：\n1.惨不忍睹的网络环境\n 2.服务器君的不定期抽风\n 3.GeekNews现在心情不好拒绝服务喔~</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="nav_title_home">首页</string>
+    <string name="nav_title_knowledge_hirearchy">知识体系</string>
+    <string name="nav_title_navigation">导航</string>
+    <string name="nav_title_project">项目</string>
+    <string name="nav_title_me">我的</string>
 </resources>

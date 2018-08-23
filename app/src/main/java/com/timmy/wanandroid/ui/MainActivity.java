@@ -1,5 +1,9 @@
 package com.timmy.wanandroid.ui;
 
+import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.widget.ContentFrameLayout;
+
 import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.contract.main.MainContract;
 import com.timmy.wanandroid.core.activity.BaseActivity;
@@ -8,8 +12,15 @@ import com.timmy.wanandroid.presenter.main.MainPresenter;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.IView {
 
+
+    @BindView(R.id.cfl_group)
+    ContentFrameLayout mCflGroup;
+    @BindView(R.id.bnv_main)
+    BottomNavigationView mBnvMain;
 
     @Override
     protected int getLayout() {
@@ -17,9 +28,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
-    protected void initEventAndData() {
-        mPresenter.getBanner();
-        stateLoading();
+    protected void initEventAndData(Bundle savedInstanceState) {
+        //mPresenter.getBanner();
+        //stateLoading();
     }
 
     @Override
