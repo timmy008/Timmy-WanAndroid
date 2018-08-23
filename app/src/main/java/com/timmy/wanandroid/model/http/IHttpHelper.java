@@ -1,11 +1,12 @@
 package com.timmy.wanandroid.model.http;
 
-import com.timmy.wanandroid.model.bean.WelcomeBean;
+import com.timmy.wanandroid.model.bean.HttpResponse;
 
 import io.reactivex.Flowable;
 
 public interface IHttpHelper {
 
 
-    Flowable<WelcomeBean> fetchWelcomeInfo(String res);
+
+    Flowable<HttpResponse> getBanner();
 }

@@ -26,11 +26,11 @@ public class MainPresenter extends RxPresenter<MainContract.IView> implements Ma
     @Override
     public String getMy() {
 
-        addSubscribe(mDataManager.fetchWelcomeInfo(RES)
+        addSubscribe(mDataManager.getBanner()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onNext -> {
-                    String text = onNext.getText();
+                    Object text = onNext.getData();
 
                 }, onError -> {
                     Log.e(onError, "", "");

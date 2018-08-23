@@ -1,5 +1,6 @@
 package com.timmy.wanandroid.model.http;
 
+import com.timmy.wanandroid.model.bean.HttpResponse;
 import com.timmy.wanandroid.model.bean.WelcomeBean;
 import com.timmy.wanandroid.model.http.api.Apis;
 
@@ -18,8 +19,10 @@ public class RetrofitHelper implements IHttpHelper {
 
 
 
+
+
     @Override
-    public Flowable<WelcomeBean> fetchWelcomeInfo(String res) {
-        return mApi.getWelcomeInfo(res);
+    public Flowable<HttpResponse> getBanner() {
+        return mApi.getBanner();
     }
 }
