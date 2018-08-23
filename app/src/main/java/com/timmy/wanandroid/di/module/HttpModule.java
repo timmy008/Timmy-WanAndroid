@@ -2,6 +2,7 @@ package com.timmy.wanandroid.di.module;
 
 import com.timmy.wanandroid.BuildConfig;
 import com.timmy.wanandroid.app.Constants;
+import com.timmy.wanandroid.core.Log;
 import com.timmy.wanandroid.model.http.api.Apis;
 import com.timmy.wanandroid.utils.SystemUtil;
 
@@ -60,38 +61,35 @@ public class HttpModule {
     OkHttpClient provideClient(OkHttpClient.Builder builder) {
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
         File cacheFile = new File(Constants.PATH_CACHE);
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
-        Interceptor cacheInterceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                if (!SystemUtil.isNetworkConnected()) {
-                    request = request.newBuilder()
-                            .cacheControl(CacheControl.FORCE_CACHE)
-                            .build();
-                }
-                Response response = chain.proceed(request);
-                if (SystemUtil.isNetworkConnected()) {
-                    int maxAge = 0;
-                    // 有网络时, 不缓存, 最大保存时长为0
-                    response.newBuilder()
-                            .header("Cache-Control", "public, max-age=" + maxAge)
-                            .removeHeader("Pragma")
-                            .build();
-                } else {
-                    // 无网络时，设置超时为4周
-                    int maxStale = 60 * 60 * 24 * 28;
-                    response.newBuilder()
-                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                            .removeHeader("Pragma")
-                            .build();
-                }
-                return response;
+        Interceptor cacheInterceptor = chain -> {
+            Request request = chain.request();
+            if (!SystemUtil.isNetworkConnected()) {
+                request = request.newBuilder()
+                        .cacheControl(CacheControl.FORCE_CACHE)
+                        .build();
             }
+            Response response = chain.proceed(request);
+            if (SystemUtil.isNetworkConnected()) {
+                int maxAge = 0;
+                // 有网络时, 不缓存, 最大保存时长为0
+                response.newBuilder()
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .removeHeader("Pragma")
+                        .build();
+            } else {
+                // 无网络时，设置超时为4周
+                int maxStale = 60 * 60 * 24 * 28;
+                response.newBuilder()
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .removeHeader("Pragma")
+                        .build();
+            }
+            return response;
         };
 //        Interceptor apikey = new Interceptor() {
 //            @Override

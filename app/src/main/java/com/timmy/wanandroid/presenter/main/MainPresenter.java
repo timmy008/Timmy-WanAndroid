@@ -15,9 +15,11 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -33,17 +35,16 @@ public class MainPresenter extends RxPresenter<MainContract.IView> implements Ma
 
 
     @Override
-    public String getMy() {
+    public void getBanner() {
         addSubscribe(mDataManager.getBanner()
                 .compose(RxUtil.rxSchedulerHelper())
                 .compose(RxUtil.handleResult())
                 .subscribeWith(new CommonSubscriber<List<BannerItemInfo>>(mView) {
                     @Override
                     public void onNext(List<BannerItemInfo> bannerItemInfos) {
-                        ToastUtil.shortShow("" + bannerItemInfos.size());
+                        mView.showBanner(bannerItemInfos);
                     }
                 })
         );
-        return "";
     }
 }

@@ -46,22 +46,7 @@ public abstract class MvpBasicActivity<T extends IBasePresenter> extends BasicAc
     }
 
     @Override
-    public void stateError() {
-
-    }
-
-    @Override
-    public void stateEmpty() {
-
-    }
-
-    @Override
-    public void stateLoading() {
-
-    }
-
-    @Override
-    public void stateMain() {
+    public void showErrorMsg(String msg) {
 
     }
 

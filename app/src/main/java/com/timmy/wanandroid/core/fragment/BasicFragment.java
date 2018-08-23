@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 
 import com.squareup.leakcanary.RefWatcher;
 import com.timmy.wanandroid.App;
+import com.timmy.wanandroid.core.Log;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -18,17 +21,47 @@ import me.yokeyword.fragmentation.SupportFragment;
 public abstract class BasicFragment extends SupportFragment {
 
 
+    protected View mView;
+    private Unbinder mUnBinder;
+    protected boolean isInited = false;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       // inflater.inflate(getLayout,container);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        mView = inflater.inflate(getLayoutId(), null);
+        return mView;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mUnBinder = ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        isInited = true;
+        initEventAndData();
+    }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         RefWatcher refWatcher = App.getRefWatcher(_mActivity);
         refWatcher.watch(this);
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
     }
+
+    protected abstract int getLayoutId();
+
+    protected abstract void initEventAndData();
 }

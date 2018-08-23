@@ -1,4 +1,4 @@
-package com.timmy.wanandroid.core.activity;
+package com.timmy.wanandroid.core.fragment;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +7,7 @@ import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.core.presenter.IBasePresenter;
 import com.timmy.wanandroid.widget.ProgressImageView;
 
-public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicActivity<T> {
-
-
+public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFragment<T> {
     private static final int STATE_MAIN = 0x00;
     private static final int STATE_LOADING = 0x01;
     private static final int STATE_ERROR = 0x02;
@@ -27,7 +25,9 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
 
     @Override
     protected void initEventAndData() {
-        viewMain = findViewById(R.id.view_main);
+        if (getView() == null)
+            return;
+        viewMain = getView().findViewById(R.id.view_main);
         if (viewMain == null) {
             throw new IllegalStateException(
                     "The subclass of RootActivity must contain a View named 'view_main'.");
@@ -37,7 +37,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
                     "view_main's ParentView should be a ViewGroup.");
         }
         mParent = (ViewGroup) viewMain.getParent();
-        View.inflate(mContext, R.layout.view_progress, mParent);
+        View.inflate(_mActivity, R.layout.view_progress, mParent);
         viewLoading = mParent.findViewById(R.id.view_loading);
         ivLoading = viewLoading.findViewById(R.id.iv_progress);
         viewLoading.setVisibility(View.GONE);
@@ -50,7 +50,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
             return;
         if (!isErrorViewAdded) {
             isErrorViewAdded = true;
-            View.inflate(mContext, mErrorResource, mParent);
+            View.inflate(_mActivity, mErrorResource, mParent);
             viewError = mParent.findViewById(R.id.view_error);
             if (viewError == null) {
                 throw new IllegalStateException(
@@ -71,6 +71,11 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
         viewLoading.setVisibility(View.VISIBLE);
         ivLoading.start();
     }
+    @Override
+    public void stateEmpty() {
+
+    }
+
 
     @Override
     public void stateMain() {
@@ -79,11 +84,6 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
         hideCurrentView();
         currentState = STATE_MAIN;
         viewMain.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void stateEmpty() {
-        // TODO
     }
 
     private void hideCurrentView() {
@@ -106,5 +106,4 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
     public void setErrorResource(int errorLayoutResource) {
         this.mErrorResource = errorLayoutResource;
     }
-
 }
