@@ -1,7 +1,10 @@
 package com.timmy.wanandroid.model;
 
-import com.timmy.wanandroid.model.bean.HttpResponse;
+import com.timmy.wanandroid.model.bean.BannerItemInfo;
+import com.timmy.wanandroid.model.http.response.HttpResponse;
 import com.timmy.wanandroid.model.http.IHttpHelper;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 
@@ -17,9 +20,8 @@ public class DataManager implements IHttpHelper {
     }
 
 
-
     @Override
-    public Flowable<HttpResponse> getBanner() {
+    public Flowable<HttpResponse<List<BannerItemInfo>>> getBanner() {
         return mHttpHelper.getBanner();
     }
 }

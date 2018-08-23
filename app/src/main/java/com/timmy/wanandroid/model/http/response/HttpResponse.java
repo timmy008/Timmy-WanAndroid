@@ -1,4 +1,4 @@
-package com.timmy.wanandroid.model.bean;
+package com.timmy.wanandroid.model.http.response;
 
 public class HttpResponse<T> {
     private T data;

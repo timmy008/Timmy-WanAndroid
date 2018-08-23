@@ -22,4 +22,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     protected void initInject() {
         getActivityComponent().inject(this);
     }
+
+
 }

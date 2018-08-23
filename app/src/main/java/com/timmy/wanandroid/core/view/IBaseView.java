@@ -5,7 +5,7 @@ package com.timmy.wanandroid.core.view;
  */
 public interface IBaseView {
 
-    // void showErrorMsg(String msg);
+     void showErrorMsg(String msg);
 
     // void useNightMode(boolean isNight);
 

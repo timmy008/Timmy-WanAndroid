@@ -4,7 +4,17 @@ import com.timmy.wanandroid.contract.main.MainContract;
 import com.timmy.wanandroid.core.Log;
 import com.timmy.wanandroid.core.presenter.RxPresenter;
 import com.timmy.wanandroid.model.DataManager;
+import com.timmy.wanandroid.model.bean.BannerItemInfo;
 import com.timmy.wanandroid.model.bean.WelcomeBean;
+import com.timmy.wanandroid.model.http.response.HttpResponse;
+import com.timmy.wanandroid.model.http.subscriber.CommonSubscriber;
+import com.timmy.wanandroid.utils.RxUtil;
+import com.timmy.wanandroid.utils.ToastUtil;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,14 +37,15 @@ public class MainPresenter extends RxPresenter<MainContract.IView> implements Ma
     public String getMy() {
 
         addSubscribe(mDataManager.getBanner()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(onNext -> {
-                    Object text = onNext.getData();
-
-                }, onError -> {
-                    Log.e(onError, "", "");
-                }));
+                .compose(RxUtil.rxSchedulerHelper())
+                .compose(RxUtil.handleResult())
+                .subscribeWith(new CommonSubscriber<List<BannerItemInfo>>(mView) {
+                    @Override
+                    public void onNext(List<BannerItemInfo> bannerItemInfos) {
+                        ToastUtil.shortShow("" + bannerItemInfos.size());
+                    }
+                })
+        );
         return "";
     }
 }

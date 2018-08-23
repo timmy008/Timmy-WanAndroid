@@ -1,11 +1,12 @@
 package com.timmy.wanandroid.model.http.api;
 
-import com.timmy.wanandroid.model.bean.HttpResponse;
-import com.timmy.wanandroid.model.bean.WelcomeBean;
+import com.timmy.wanandroid.model.bean.BannerItemInfo;
+import com.timmy.wanandroid.model.http.response.HttpResponse;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public interface Apis {
 
@@ -14,6 +15,6 @@ public interface Apis {
 
 
     @GET("banner/json")
-    Flowable<HttpResponse> getBanner();
+    Flowable<HttpResponse<List<BannerItemInfo>>> getBanner();
 
 }

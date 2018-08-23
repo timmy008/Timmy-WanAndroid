@@ -1,8 +1,10 @@
 package com.timmy.wanandroid.model.http;
 
-import com.timmy.wanandroid.model.bean.HttpResponse;
-import com.timmy.wanandroid.model.bean.WelcomeBean;
+import com.timmy.wanandroid.model.bean.BannerItemInfo;
+import com.timmy.wanandroid.model.http.response.HttpResponse;
 import com.timmy.wanandroid.model.http.api.Apis;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,12 +19,8 @@ public class RetrofitHelper implements IHttpHelper {
     }
 
 
-
-
-
-
     @Override
-    public Flowable<HttpResponse> getBanner() {
+    public Flowable<HttpResponse<List<BannerItemInfo>>> getBanner() {
         return mApi.getBanner();
     }
 }
