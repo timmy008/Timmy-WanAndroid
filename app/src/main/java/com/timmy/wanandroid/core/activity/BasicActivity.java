@@ -23,6 +23,7 @@ public abstract class BasicActivity extends SupportActivity {
         mContext = this;
         onViewCreated();
         App.getInstance().addActivity(this);
+        initEventAndData();
     }
 
     protected void onViewCreated() {
@@ -42,4 +43,5 @@ public abstract class BasicActivity extends SupportActivity {
     }
 
     protected abstract int getLayout();
+    protected abstract void initEventAndData();
 }

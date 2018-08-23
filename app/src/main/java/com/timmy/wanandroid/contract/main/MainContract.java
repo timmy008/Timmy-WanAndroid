@@ -10,6 +10,6 @@ public interface MainContract {
     }
 
     interface IPresenter extends IBasePresenter<IView> {
-
+        String getMy();
     }
 }

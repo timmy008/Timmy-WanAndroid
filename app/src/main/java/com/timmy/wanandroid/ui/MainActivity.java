@@ -14,6 +14,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
+    protected void initEventAndData() {
+        mPresenter.getMy();
+    }
+
+    @Override
     protected void initInject() {
         getActivityComponent().inject(this);
     }
