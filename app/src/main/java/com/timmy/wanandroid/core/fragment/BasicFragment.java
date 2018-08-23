@@ -47,7 +47,7 @@ public abstract class BasicFragment extends SupportFragment {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         isInited = true;
-        initEventAndData();
+        initStateUI();
     }
 
 
@@ -62,6 +62,5 @@ public abstract class BasicFragment extends SupportFragment {
     }
 
     protected abstract int getLayoutId();
-
-    protected abstract void initEventAndData();
+    protected abstract void initStateUI();
 }

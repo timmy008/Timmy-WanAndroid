@@ -24,17 +24,16 @@ public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFra
     private boolean isErrorViewAdded = false;
 
     @Override
-    protected void initEventAndData() {
-        if (getView() == null)
+    protected void initStateUI() {
+        if (getView() == null) {
             return;
+        }
         viewMain = getView().findViewById(R.id.view_main);
         if (viewMain == null) {
-            throw new IllegalStateException(
-                    "The subclass of RootActivity must contain a View named 'view_main'.");
+            throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_main'.");
         }
         if (!(viewMain.getParent() instanceof ViewGroup)) {
-            throw new IllegalStateException(
-                    "view_main's ParentView should be a ViewGroup.");
+            throw new IllegalStateException("view_main's ParentView should be a ViewGroup.");
         }
         mParent = (ViewGroup) viewMain.getParent();
         View.inflate(_mActivity, R.layout.view_progress, mParent);
@@ -71,6 +70,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFra
         viewLoading.setVisibility(View.VISIBLE);
         ivLoading.start();
     }
+
     @Override
     public void stateEmpty() {
 
@@ -106,4 +106,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFra
     public void setErrorResource(int errorLayoutResource) {
         this.mErrorResource = errorLayoutResource;
     }
+
+    protected abstract void initEventAndData();
+
 }

@@ -18,7 +18,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData() {
-        super.initEventAndData();
         mPresenter.getBanner();
         stateLoading();
     }

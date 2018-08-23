@@ -26,15 +26,13 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
     private boolean isErrorViewAdded = false;
 
     @Override
-    protected void initEventAndData() {
+    protected void initStateUI() {
         viewMain = findViewById(R.id.view_main);
         if (viewMain == null) {
-            throw new IllegalStateException(
-                    "The subclass of RootActivity must contain a View named 'view_main'.");
+            throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_main'.");
         }
         if (!(viewMain.getParent() instanceof ViewGroup)) {
-            throw new IllegalStateException(
-                    "view_main's ParentView should be a ViewGroup.");
+            throw new IllegalStateException("view_main's ParentView should be a ViewGroup.");
         }
         mParent = (ViewGroup) viewMain.getParent();
         View.inflate(mContext, R.layout.view_progress, mParent);
@@ -42,6 +40,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
         ivLoading = viewLoading.findViewById(R.id.iv_progress);
         viewLoading.setVisibility(View.GONE);
         viewMain.setVisibility(View.VISIBLE);
+        initEventAndData();
     }
 
     @Override
@@ -103,8 +102,18 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
         }
     }
 
+    /**
+     * 加载出错时显示的UI
+     *
+     * @param errorLayoutResource 布局id
+     */
     public void setErrorResource(int errorLayoutResource) {
         this.mErrorResource = errorLayoutResource;
     }
+
+    /**
+     * 界面入口
+     */
+    protected abstract void initEventAndData();
 
 }
