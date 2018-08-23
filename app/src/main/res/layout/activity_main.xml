@@ -6,22 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.main.activity.MainActivity">
 
-    <android.support.v7.widget.ContentFrameLayout
-        android:id="@+id/cfl_group"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bnv_main"
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/commont_tab_layout_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:background="@color/bg_bottom_nav"
-        app:itemIconTint="@drawable/nav_item_color_state"
-        app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/navigation" />
+        app:tl_iconHeight="23dp"
+        app:tl_iconWidth="23dp"
+        app:tl_textSelectColor="#f39c12"
+        app:tl_textUnselectColor="#cdcdcd"
+        app:tl_textsize="12sp"
+        app:tl_underline_color="#DDDDDD"
+        app:tl_underline_height="1dp"/>
 
 
 </android.support.v7.widget.LinearLayoutCompat>
