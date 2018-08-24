@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.jaeger.library.StatusBarUtil;
 import com.timmy.wanandroid.App;
+import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.core.Log;
 
 import butterknife.ButterKnife;
@@ -15,6 +17,16 @@ public abstract class BasicActivity extends SupportActivity {
 
     protected Activity mContext;
     private Unbinder mUnBinder;
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        setStatusBar();
+
+    }
+    protected void setStatusBar() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimaryDark));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

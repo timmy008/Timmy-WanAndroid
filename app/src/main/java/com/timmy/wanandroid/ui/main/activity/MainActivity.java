@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.jaeger.library.StatusBarUtil;
 import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.contract.main.MainContract;
 import com.timmy.wanandroid.core.activity.BaseActivity;
@@ -136,5 +137,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         stateMain();
     }
 
+    @Override
+    protected void setStatusBar() {
+        StatusBarUtil.setTransparentForImageViewInFragment(this, null);
 
+    }
 }
