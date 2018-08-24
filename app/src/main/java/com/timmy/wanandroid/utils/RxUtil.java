@@ -3,6 +3,8 @@ package com.timmy.wanandroid.utils;
 import com.timmy.wanandroid.model.http.exception.ApiException;
 import com.timmy.wanandroid.model.http.response.HttpResponse;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -54,5 +56,22 @@ public class RxUtil {
                 emitter.onError(e);
             }
         }, BackpressureStrategy.BUFFER);
+    }
+
+    /**
+     * 倒计时
+     *
+     * @param time
+     * @return
+     */
+    public static Flowable<Integer> countDown(int time) {
+        if (time < 0) {
+            time = 0;
+        }
+        final int countTime = time;
+        return Flowable.interval(0, 1, TimeUnit.SECONDS)
+                .compose(rxSchedulerHelper())
+                .map(aLong -> countTime - aLong.intValue())
+                .take(countTime + 1);
     }
 }

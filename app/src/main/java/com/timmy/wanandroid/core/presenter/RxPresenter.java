@@ -9,7 +9,7 @@ import io.reactivex.functions.Consumer;
 /**
  * rx presenter
  *
- * @param <T>
+ * @param <T> IBaseView
  */
 public class RxPresenter<T extends IBaseView> implements IBasePresenter<T> {
 

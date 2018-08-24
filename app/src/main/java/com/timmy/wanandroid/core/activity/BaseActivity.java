@@ -30,7 +30,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends MvpBasicAct
     protected void initStateUI(Bundle savedInstanceState) {
         viewMain = findViewById(R.id.view_content_root);
         if (viewMain == null) {
-            throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_main'.");
+            throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_content_root'.");
         }
         if (!(viewMain.getParent() instanceof ViewGroup)) {
             throw new IllegalStateException("view_main's ParentView should be a ViewGroup.");
