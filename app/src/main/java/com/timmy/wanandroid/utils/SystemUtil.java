@@ -75,7 +75,7 @@ public class SystemUtil {
      */
     public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap, View container, boolean isShare){
         String fileName = url.substring(url.lastIndexOf("/"),url.lastIndexOf(".")) + ".png";
-        File fileDir = new File(Constants.PATH_SDCARD);
+        File fileDir = new File(Constants.PATH_IMAGE);
         if (!fileDir.exists()){
             fileDir.mkdirs();
         }

@@ -31,12 +31,12 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        mPresenter.startCountDown();
+        mPresenter.applyPermission(this);
     }
 
     @Override
     public void countDown(int second) {
-        mTvjumpMainActivity.setText(getString(R.string.splash_count_down,second));
+        mTvjumpMainActivity.setText(getString(R.string.splash_count_down, second));
     }
 
 

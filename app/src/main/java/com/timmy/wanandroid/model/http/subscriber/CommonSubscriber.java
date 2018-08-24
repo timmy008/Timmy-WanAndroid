@@ -2,7 +2,7 @@ package com.timmy.wanandroid.model.http.subscriber;
 
 import android.text.TextUtils;
 
-import com.timmy.wanandroid.core.Log;
+import com.timmy.wanandroid.core.log.TLog;
 import com.timmy.wanandroid.core.view.IBaseView;
 import com.timmy.wanandroid.model.http.exception.ApiException;
 
@@ -53,7 +53,7 @@ public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
             mView.showErrorMsg("数据加载失败ヽ(≧Д≦)ノ");
         } else {
             mView.showErrorMsg("未知错误ヽ(≧Д≦)ノ");
-            Log.d(e.toString());
+            TLog.d(e.toString());
         }
         if (isShowErrorState) {
             mView.stateError();

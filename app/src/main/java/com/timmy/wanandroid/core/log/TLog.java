@@ -1,4 +1,4 @@
-package com.timmy.wanandroid.core;
+package com.timmy.wanandroid.core.log;
 
 
 import android.support.annotation.Nullable;
@@ -10,13 +10,20 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.timmy.wanandroid.BuildConfig;
 
+import timber.log.Timber;
 
-public class Log {
-    private Log() {
+/**
+ *
+ */
+public class TLog {
+    private TLog() {
 
     }
 
     public static void init() {
+
+        Timber.plant(new ConsoleLogTree(),
+                new FileLogTree());
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
             public boolean isLoggable(int priority, @Nullable String tag) {

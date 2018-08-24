@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import com.jaeger.library.StatusBarUtil;
 import com.timmy.wanandroid.App;
 import com.timmy.wanandroid.R;
-import com.timmy.wanandroid.core.Log;
+import com.timmy.wanandroid.core.log.TLog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,7 +31,7 @@ public abstract class BasicActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("onCreate:" + this.getLocalClassName());
+        TLog.d("onCreate:" + this.getLocalClassName());
         setContentView(getLayout());
         mUnBinder = ButterKnife.bind(this);
         mContext = this;
@@ -49,7 +49,7 @@ public abstract class BasicActivity extends SupportActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("onDestroy:" + this.getLocalClassName());
+        TLog.d("onDestroy:" + this.getLocalClassName());
         App.getInstance().removeActivity(this);
         if (mUnBinder != null) {
             mUnBinder.unbind();

@@ -2,12 +2,10 @@ package com.timmy.wanandroid.di.module;
 
 import com.timmy.wanandroid.BuildConfig;
 import com.timmy.wanandroid.app.Constants;
-import com.timmy.wanandroid.core.Log;
 import com.timmy.wanandroid.model.http.api.Apis;
 import com.timmy.wanandroid.utils.SystemUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -64,7 +62,7 @@ public class HttpModule {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
-        File cacheFile = new File(Constants.PATH_CACHE);
+        File cacheFile = new File(Constants.PATH_CACHE_NET);
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
         Interceptor cacheInterceptor = chain -> {
             Request request = chain.request();

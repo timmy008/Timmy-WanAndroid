@@ -10,6 +10,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jaeger.library.StatusBarUtil;
 import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.contract.main.MainContract;
+import com.timmy.wanandroid.core.log.TLog;
 import com.timmy.wanandroid.core.activity.BaseActivity;
 import com.timmy.wanandroid.model.bean.BannerItemInfo;
 import com.timmy.wanandroid.presenter.main.MainPresenter;
@@ -59,10 +60,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        //mPresenter.getBanner();
-        //stateLoading();
+        mPresenter.getBanner();
+        stateLoading();
         initFragments();
         initUI();
+        TLog.d("222222222222222");
     }
 
     private void initFragments() {

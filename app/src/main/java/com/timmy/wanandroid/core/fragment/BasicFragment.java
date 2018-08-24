@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.squareup.leakcanary.RefWatcher;
 import com.timmy.wanandroid.App;
-import com.timmy.wanandroid.core.Log;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
