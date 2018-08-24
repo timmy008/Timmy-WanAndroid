@@ -16,5 +16,7 @@ public interface SplashContract {
 
     interface IPresenter extends IBasePresenter<IView>{
         void startCountDown();
+
+        void cancelCountDown();
     }
 }

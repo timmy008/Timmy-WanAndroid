@@ -21,4 +21,9 @@ public class SplashPresenter extends RxPresenter<SplashContract.IView> implement
                        ()-> mView.jumpToMainActivity())
        );
     }
+
+    @Override
+    public void cancelCountDown() {
+        unSubscribe();
+    }
 }
