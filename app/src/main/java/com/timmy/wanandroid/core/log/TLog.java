@@ -13,7 +13,7 @@ import com.timmy.wanandroid.BuildConfig;
 import timber.log.Timber;
 
 /**
- *
+ * 日志处理工具
  */
 public class TLog {
     private TLog() {
