@@ -12,7 +12,7 @@
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/commont_tab_layout_main"
@@ -21,11 +21,11 @@
         android:background="@color/bg_bottom_nav"
         app:tl_iconHeight="23dp"
         app:tl_iconWidth="23dp"
-        app:tl_textSelectColor="#f39c12"
-        app:tl_textUnselectColor="#cdcdcd"
+        app:tl_textSelectColor="@color/tl_text_select"
+        app:tl_textUnselectColor="@color/tl_text_unselect"
         app:tl_textsize="12sp"
-        app:tl_underline_color="#DDDDDD"
-        app:tl_underline_height="1dp"/>
+        app:tl_underline_color="@color/tl_under_line"
+        app:tl_underline_height="1dp" />
 
 
 </android.support.v7.widget.LinearLayoutCompat>
