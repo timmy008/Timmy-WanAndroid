@@ -10,6 +10,5 @@ import timber.log.Timber;
 public class FileLogTree extends Timber.DebugTree {
     @Override
     protected void log(int priority, String tag, @NotNull String message, Throwable t) {
-        super.log(priority, tag, message, t);
     }
 }

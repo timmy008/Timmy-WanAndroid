@@ -8,7 +8,6 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.timmy.wanandroid.core.log.TLog;
@@ -17,12 +16,8 @@ import com.timmy.wanandroid.di.component.DaggerAppComponent;
 import com.timmy.wanandroid.di.module.AppModule;
 import com.timmy.wanandroid.di.module.HttpModule;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashSet;
 import java.util.Set;
-
-import timber.log.Timber;
 
 public class App extends Application {
 
@@ -47,20 +42,12 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         getScreenSize();
-        TLog.init();
-        Timber.plant(new Timber.DebugTree(){
-            @Override
-            protected void log(int priority, String tag, @NotNull String message, Throwable t) {
-                Logger.log(priority,tag,message,t);
-            }
-        });
+        TLog.init(BuildConfig.DEBUG);
+
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         mRefWatcher = LeakCanary.install(this);
-        Timber.d("22222222222222222222222222");
-//        LogUtils.getLog2FileConfig().configLog2FileEnable(true)
-//        .configLog2FilePath();
     }
 
     @Override

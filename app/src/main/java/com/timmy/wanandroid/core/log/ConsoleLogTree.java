@@ -1,5 +1,7 @@
 package com.timmy.wanandroid.core.log;
 
+import com.orhanobut.logger.Logger;
+
 import org.jetbrains.annotations.NotNull;
 
 import timber.log.Timber;
@@ -10,6 +12,6 @@ import timber.log.Timber;
 public class ConsoleLogTree extends Timber.DebugTree{
     @Override
     protected void log(int priority, String tag, @NotNull String message, Throwable t) {
-        super.log(priority, tag, message, t);
+        Logger.log(priority, tag, message, t);
     }
 }
