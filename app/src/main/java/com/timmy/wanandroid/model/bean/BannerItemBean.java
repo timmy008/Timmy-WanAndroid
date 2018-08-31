@@ -1,6 +1,6 @@
 package com.timmy.wanandroid.model.bean;
 
-public class BannerItemInfo {
+public class BannerItemBean {
 
     //    {
 //        "desc": "通过聊天机器人打造智能化工作流",

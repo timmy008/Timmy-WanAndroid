@@ -30,7 +30,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFra
         }
         viewMain = getView().findViewById(R.id.view_content_root);
         if (viewMain == null) {
-            throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_main'.");
+            throw new IllegalStateException("The subclass of RootActivity must contain a View named 'view_content_root'.");
         }
         if (!(viewMain.getParent() instanceof ViewGroup)) {
             throw new IllegalStateException("view_main's ParentView should be a ViewGroup.");
@@ -41,6 +41,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends MvpBasicFra
         ivLoading = viewLoading.findViewById(R.id.iv_progress);
         viewLoading.setVisibility(View.GONE);
         viewMain.setVisibility(View.VISIBLE);
+        initEventAndData();
     }
 
     @Override

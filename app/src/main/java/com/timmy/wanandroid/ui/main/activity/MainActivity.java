@@ -12,7 +12,7 @@ import com.timmy.wanandroid.R;
 import com.timmy.wanandroid.contract.main.MainContract;
 import com.timmy.wanandroid.core.log.TLog;
 import com.timmy.wanandroid.core.activity.BaseActivity;
-import com.timmy.wanandroid.model.bean.BannerItemInfo;
+import com.timmy.wanandroid.model.bean.BannerItemBean;
 import com.timmy.wanandroid.presenter.main.MainPresenter;
 import com.timmy.wanandroid.ui.main.adapter.MainPagerAdapter;
 import com.timmy.wanandroid.ui.main.entity.TabEntity;
@@ -60,11 +60,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        mPresenter.getBanner();
-        stateLoading();
         initFragments();
         initUI();
-        TLog.d("222222222222222");
     }
 
     private void initFragments() {
@@ -96,6 +93,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
+        mViewPager.setOffscreenPageLimit(mTabEntities.size() - 1);
         mViewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), mTitles, mFragments));
         mCommonTabLayout.setTabData(mTabEntities);
         mCommonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
@@ -135,8 +133,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
 
     @Override
-    public void showBanner(List<BannerItemInfo> bannerItemInfos) {
-        stateMain();
+    public void showBanner(List<BannerItemBean> bannerItemBeans) {
+        // stateMain();
     }
 
     @Override

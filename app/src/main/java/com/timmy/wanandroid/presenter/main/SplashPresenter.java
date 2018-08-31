@@ -36,7 +36,7 @@ public class SplashPresenter extends RxPresenter<SplashContract.IView> implement
     @Override
     public void startCountDown() {
         addSubscribe(
-                RxUtil.countDown(5)
+                RxUtil.countDown(2)
                         .subscribe(onNext -> mView.countDown(onNext),
                                 onError -> mView.jumpToMainActivity(),
                                 () -> mView.jumpToMainActivity())

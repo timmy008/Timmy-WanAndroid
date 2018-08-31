@@ -6,10 +6,11 @@ import com.timmy.wanandroid.core.log.TLog;
 import com.timmy.wanandroid.core.view.IBaseView;
 import com.timmy.wanandroid.model.http.exception.ApiException;
 
+import io.reactivex.observers.ResourceObserver;
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
 
-public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
+public abstract class CommonSubscriber<T> extends ResourceObserver<T> {
     private IBaseView mView;
     private String mErrorMsg;
     private boolean isShowErrorState = true;

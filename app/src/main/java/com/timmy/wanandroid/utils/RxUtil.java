@@ -5,9 +5,9 @@ import com.timmy.wanandroid.model.http.response.HttpResponse;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.FlowableTransformer;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -19,44 +19,47 @@ public class RxUtil {
      * @param <T>
      * @return
      */
-    public static <T> FlowableTransformer<T, T> rxSchedulerHelper() {
+    public static <T> ObservableTransformer<T, T> rxSchedulerHelper() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+
     /**
      * 统一返回结果处理
      *
-     * @param <T>
-     * @return
+     * @param <T> 指定的泛型类型
+     * @return ObservableTransformer
      */
-    public static <T> FlowableTransformer<HttpResponse<T>, T> handleResult() {
-        return httpResponseFlowable -> httpResponseFlowable
-                .flatMap((Function<HttpResponse<T>, Flowable<T>>) httpResponse -> {
-                    if (httpResponse.getErrorCode() == 0) {
-                        return createData(httpResponse.getData());
+    public static <T> ObservableTransformer<HttpResponse<T>, T> handleResult() {
+        return httpResponseObservable ->
+                httpResponseObservable.flatMap((Function<HttpResponse<T>, Observable<T>>) baseResponse -> {
+                    if (baseResponse.getErrorCode() == 0
+                            && baseResponse.getData() != null) {
+                        return createData(baseResponse.getData());
                     } else {
-                        return Flowable.error(new ApiException("服务器返回error"));
+                        return Observable.error(new ApiException("服务器返回error"));
                     }
                 });
     }
 
     /**
-     * 生成Flowable
+     * 得到 Observable
      *
-     * @param <T>
-     * @return
+     * @param <T> 指定的泛型类型
+     * @return Observable
      */
-    public static <T> Flowable<T> createData(final T t) {
-        return Flowable.create(emitter -> {
+    private static <T> Observable<T> createData(final T t) {
+        return Observable.create(emitter -> {
             try {
                 emitter.onNext(t);
                 emitter.onComplete();
             } catch (Exception e) {
                 emitter.onError(e);
             }
-        }, BackpressureStrategy.BUFFER);
+        });
     }
+
 
     /**
      * 倒计时
@@ -70,7 +73,8 @@ public class RxUtil {
         }
         final int countTime = time;
         return Flowable.interval(0, 1, TimeUnit.SECONDS)
-                .compose(rxSchedulerHelper())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .map(aLong -> countTime - aLong.intValue())
                 .take(countTime + 1);
     }
